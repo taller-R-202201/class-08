@@ -35,30 +35,29 @@ browseURL(url = "https://intro2r.com/loops.html#for-loop", browser = getOption("
 ## Estructura de datos
 dev.off()
 grid.raster(readPNG("input/pics/bucle_flow.png")) # source: datacamp
-browseURL("")
 
 #----------------------#
 ## Estructura de un bucle (for)
 vector =  1:5
-for (i in c(1,2,3,4,5)){ # Vector sobre el que se va a aplicar el loop
-     i = i*i  # Sobreescribe i como el resultado de i*i
-     print(i) # Pinta el resultado sobre la consola
+for (i in vector){ # Vector sobre el que se va a aplicar el loop
+     casa = i*i  # Sobreescribe i como el resultado de i*i
+     print(casa) # Pinta el resultado sobre la consola
 }
 
 results = tibble(i = 1:5 , resultado = NA)
 for (i in vector){ # Vector sobre el que se va a aplicar el loop
      n = i
-     i = i*i  # Sobreescribe i como el resultado de i*i
-     print(i) # Pinta el resultado sobre la consola
-     results$resultado[n] = i
+     casa = i*i  # Sobreescribe i como el resultado de i*i
+     print(casa) # Pinta el resultado sobre la consola
+     results$resultado[n] = casa
 }
 
 results1 = tibble(i = 1:5 , resultado = NA)
 for (i in vector){ # Vector sobre el que se va a aplicar el loop
      n = i
-     i = i*i*i  # Sobreescribe i como el resultado de i*i
-     print(i) # Pinta el resultado sobre la consola
-     results1$resultado[n] = i
+     casa = i*i*i  # Sobreescribe i como el resultado de i*i
+     print(casa) # Pinta el resultado sobre la consola
+     results1$resultado[n] = casa
 }
 
 #----------------------#
@@ -74,9 +73,9 @@ repeat{
 #----------------------#
 ## Estructura de un bucle (while)
 j = 1
-while (j <= 5) { # condición
+while (j <=5) { # condición
        print(j*j) # pintar sobre la consola el producto de j*j
-       j = j+1 # sobreescribir j como j + 1
+       j = j-1 # sobreescribir j como j + 1
 }
 
 #----------------------#
@@ -99,6 +98,14 @@ for(i in 2:ncol(df)){
 }
 df
 
+
+
+df
+names_df = colnames(df)[2:7]
+for(i in names_df){
+  df[,i] = df[,i]*100
+}
+df
 #=============================#
 #=== 2. Controles de flujo ===#         
 #=============================#
@@ -135,31 +142,51 @@ cat("Hacer en clase")
 
 #----------------------#
 ## 1. Lista de archivos 
-
+rutas = list.files("input/chip",full.names = T , recursive = T)
 
 #----------------------#
 ## 2. Hacer ejemplo para una observación
 
 ## 2.1. Leer archivo
-
+df = import(file = rutas[1])
 
 ## 2.2. Obtener codigo-DANE 
-
+name = colnames(df)[1]
 
 ## 2.3. Obtener tipo de inversion
-
+tipo = df[8,2]
 
 ## 2.4. Obtener valor
-
+valor = df[8,8]
 
 ## 2.5. Exportar resultados
-
+data = tibble(codigo=name , tipo_inv=tipo , valor_inv=valor)
 
 #----------------------#
 ## 3. Generalizar loop
+data = tibble(codigo=rep(NA,40) , 
+              tipo_inv=rep(NA,40) , 
+              valor_inv=rep(NA,40))
 
+for (i in 1:40){
 
-
+  ## 2.1. Leer archivo
+  df = import(file = rutas[i])
+  
+  ## 2.2. Obtener codigo-DANE 
+  name = colnames(df)[1]
+  
+  ## 2.3. Obtener tipo de inversion
+  tipo = df[8,2]
+  
+  ## 2.4. Obtener valor
+  valor = df[8,8]
+  
+data[i,1] = name
+data[i,2] = tipo
+data[i,3] = valor
+  
+}
 
 
 
