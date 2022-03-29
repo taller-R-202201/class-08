@@ -75,7 +75,7 @@ repeat{
 j = 1
 while (j <=5) { # condición
        print(j*j) # pintar sobre la consola el producto de j*j
-       j = j-1 # sobreescribir j como j + 1
+       j = j+1 # sobreescribir j como j + 1
 }
 
 #----------------------#
@@ -170,22 +170,22 @@ data = tibble(codigo=rep(NA,40) ,
 
 for (i in 1:40){
 
-  ## 2.1. Leer archivo
-  df = import(file = rutas[i])
-  
-  ## 2.2. Obtener codigo-DANE 
-  name = colnames(df)[1]
-  
-  ## 2.3. Obtener tipo de inversion
-  tipo = df[8,2]
-  
-  ## 2.4. Obtener valor
-  valor = df[8,8]
-  
-data[i,1] = name
-data[i,2] = tipo
-data[i,3] = valor
-  
+     ## 3.1. Leer archivo
+     df = import(file = rutas[i])
+    
+     ## 3.2. Obtener codigo-DANE 
+     name = colnames(df)[1]
+    
+     ## 3.3. Obtener tipo de inversion
+     tipo = df[8,2]
+    
+     ## 3.4. Obtener valor
+     valor = df[8,8]
+    
+     ## 3.5 Exporrt results
+     data$codigo[i] = name
+     data$tipo_inv[i] = tipo
+     data$valor_inv[i] = valor
 }
 
 
